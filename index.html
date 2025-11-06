@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="FlowLedger - Smart bookkeeping for freelancers and small business owners. Automated expense tracking, tax preparation, and financial insights.">
+    <title>FlowLedger - Smart Bookkeeping for Freelancers</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #4F46E5;
+            --primary-dark: #4338CA;
+            --secondary: #10B981;
+            --dark: #1F2937;
+            --light: #F9FAFB;
+            --border: #E5E7EB;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+        }
+
+        /* Navigation */
+        nav {
+            background: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        section {
+            padding: 4rem 0;
+        }
+
+        section h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--dark);
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            padding: 2rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .feature-card p {
+            color: #6B7280;
+        }
+
+        /* Integration Section */
+        .integration {
+            background: var(--light);
+        }
+
+        .integration-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .integration-text h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .integration-text ul {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .integration-text li {
+            padding: 0.5rem 0;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .integration-text li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        .integration-image {
+            text-align: center;
+        }
+
+        .plaid-badge {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        /* Tech Stack */
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .tech-badge {
+            padding: 0.5rem 1rem;
+            background: var(--light);
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        /* Security Section */
+        .security-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .security-item {
+            padding: 1.5rem;
+            background: white;
+            border-left: 4px solid var(--secondary);
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .security-item i {
+            color: var(--secondary);
+            margin-right: 0.5rem;
+        }
+
+        /* Getting Started */
+        .code-block {
+            background: var(--dark);
+            color: #E5E7EB;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        .code-block code {
+            font-family: 'Courier New', monospace;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .integration-content {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            section h2 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">💰 FlowLedger</a>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#integration">Integration</a></li>
+                <li><a href="#security">Security</a></li>
+                <li><a href="#getting-started">Get Started</a></li>
+                <li><a href="https://github.com/yourusername/flowledger" target="_blank">GitHub</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Smart Bookkeeping for Freelancers</h1>
+        <p>Automated expense tracking, tax preparation, and financial insights—all in one iOS app.</p>
+        <div class="cta-buttons">
+            <a href="#getting-started" class="btn btn-primary">Get Started</a>
+            <a href="https://github.com/yourusername/flowledger" class="btn btn-secondary" target="_blank">
+                <i class="fab fa-github"></i> View on GitHub
+            </a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features">
+        <div class="container">
+            <h2>Everything You Need to Manage Your Finances</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-university"></i></div>
+                    <h3>Automated Bank Sync</h3>
+                    <p>Connect multiple accounts securely via Plaid. Real-time transaction imports with no manual entry required.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-robot"></i></div>
+                    <h3>AI-Powered Categorization</h3>
+                    <p>Intelligent expense categorization with IRS-compliant business expense tracking and receipt scanning.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>Financial Insights</h3>
+                    <p>Real-time profit & loss statements, cash flow forecasts, and visual spending breakdowns.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-file-invoice-dollar"></i></div>
+                    <h3>Tax Preparation</h3>
+                    <p>Quarterly tax estimators, mileage tracking for 1099 contractors, and easy exports to TurboTax or your CPA.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-receipt"></i></div>
+                    <h3>Receipt Management</h3>
+                    <p>Scan and match receipts to transactions automatically. Keep perfect audit trails for deductions.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-mobile-alt"></i></div>
+                    <h3>Mobile First</h3>
+                    <p>Built for iOS with SwiftUI. Manage your finances on the go with a beautiful, intuitive interface.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Integration Section -->
+    <section id="integration" class="integration">
+        <div class="container">
+            <h2>Powered by Plaid</h2>
+            <div class="integration-content">
+                <div class="integration-text">
+                    <h3>Secure, Reliable Bank Connectivity</h3>
+                    <p>FlowLedger leverages Plaid's industry-leading financial data infrastructure to provide seamless bank integrations.</p>
+                    <ul>
+                        <li>Connect to 12,000+ financial institutions</li>
+                        <li>Bank-level encryption (256-bit AES)</li>
+                        <li>Read-only access—we never store credentials</li>
+                        <li>Real-time transaction and balance updates</li>
+                        <li>SOC 2 Type II compliant infrastructure</li>
+                    </ul>
+                    <h4 style="margin-top: 2rem; margin-bottom: 1rem;">Plaid Products Used</h4>
+                    <div class="tech-stack">
+                        <span class="tech-badge">Transactions</span>
+                        <span class="tech-badge">Balance</span>
+                        <span class="tech-badge">Auth</span>
+                    </div>
+                </div>
+                <div class="integration-image">
+                    <div class="plaid-badge">
+                        <i class="fas fa-shield-alt"></i> Secured by Plaid
+                    </div>
+                    <p style="margin-top: 2rem; color: #6B7280;">
+                        Trusted by millions of users worldwide for secure financial data connectivity.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Security Section -->
+    <section id="security">
+        <div class="container">
+            <h2>Security & Privacy First</h2>
+            <div class="security-grid">
+                <div class="security-item">
+                    <h4><i class="fas fa-lock"></i> End-to-End Encryption</h4>
+                    <p>All financial data is encrypted in transit and at rest using industry-standard protocols.</p>
+                </div>
+                <div class="security-item">
+                    <h4><i class="fas fa-eye-slash"></i> Read-Only Access</h4>
+                    <p>We can only view your transactions—never move money or access credentials.</p>
+                </div>
+                <div class="security-item">
+                    <h4><i class="fas fa-user-shield"></i> Privacy Controls</h4>
+                    <p>Full control over which accounts to connect and when to disconnect.</p>
+                </div>
+                <div class="security-item">
+                    <h4><i class="fas fa-certificate"></i> Compliance</h4>
+                    <p>SOC 2 Type II, GDPR, and CCPA compliant with regular security audits.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Getting Started Section -->
+    <section id="getting-started">
+        <div class="container">
+            <h2>Getting Started</h2>
+            
+            <h3 style="margin-top: 2rem;">Installation</h3>
+            <div class="code-block">
+                <code># Clone the repository<br>
+git clone https://github.com/yourusername/flowledger.git<br><br>
+
+# Navigate to project directory<br>
+cd flowledger<br><br>
+
+# Install dependencies<br>
+pod install<br><br>
+
+# Open workspace<br>
+open FlowLedger.xcworkspace</code>
+            </div>
+
+            <h3 style="margin-top: 2rem;">Requirements</h3>
+            <ul style="margin: 1rem 0; margin-left: 2rem;">
+                <li>iOS 15.0 or later</li>
+                <li>Xcode 15.0+</li>
+                <li>CocoaPods or Swift Package Manager</li>
+                <li>Plaid API credentials (sign up at <a href="https://dashboard.plaid.com/" target="_blank">Plaid Dashboard</a>)</li>
+            </ul>
+
+            <h3 style="margin-top: 2rem;">Tech Stack</h3>
+            <div class="tech-stack">
+                <span class="tech-badge">SwiftUI</span>
+                <span class="tech-badge">Combine</span>
+                <span class="tech-badge">Core Data</span>
+                <span class="tech-badge">Plaid SDK</span>
+                <span class="tech-badge">Vision</span>
+                <span class="tech-badge">Core ML</span>
+                <span class="tech-badge">Core Location</span>
+            </div>
+
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="https://github.com/yourusername/flowledger" class="btn btn-primary" target="_blank">
+                    <i class="fab fa-github"></i> View Full Documentation
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="https://github.com/yourusername/flowledger">GitHub</a>
+            <a href="https://github.com/yourusername/flowledger/blob/main/docs/API.md">API Docs</a>
+            <a href="https://github.com/yourusername/flowledger/blob/main/CONTRIBUTING.md">Contributing</a>
+            <a href="https://github.com/yourusername/flowledger/issues">Issues</a>
+            <a href="mailto:support@flowledger.com">Contact</a>
+        </div>
+        
+        <div class="social-links">
+            <a href="https://github.com/yourusername/flowledger" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://twitter.com/flowledger" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://linkedin.com/company/flowledger" target="_blank"><i class="fab fa-linkedin"></i></a>
+        </div>
+
+        <p style="margin-top: 2rem; opacity: 0.7;">&copy; 2024 FlowLedger. MIT License.</p>
+        <p style="opacity: 0.7;">Made with ❤️ by the FlowLedger Team</p>
+    </footer>
+</body>
+</html>
